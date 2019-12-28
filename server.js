@@ -1313,7 +1313,7 @@ client.on("message", message => {
      .setDescription("Run the command `/shop [category]` to learn more about the items in each category! e.g. `/shop roles`")
      .addField("TestCategory", testStr, true)
      .setColor(0x00FF00)
-     message.channel.send(embed)
+     return message.channel.send(embed)
    }
 
     if (args[0].toUpperCase() === "TEST") {
@@ -1325,7 +1325,7 @@ client.on("message", message => {
       for (i = 0; 1 < db.fetch("shop")[0].items.length; i++) {
         embed.addField(i.name, i.desc, true);
       }
-      message.channel.send(embed)
+      return message.channel.send(embed)
     }
  }
 
