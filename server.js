@@ -1,3 +1,4 @@
+require("dotenv").config({ path: "/home/bitnami/bot/.env" });
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const db = require("quick.db");
