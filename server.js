@@ -1315,18 +1315,19 @@ client.on("message", message => {
      .setColor(0x00FF00)
      return message.channel.send(embed)
    }
-
-    if (args[0].toUpperCase() === "TEST") {
-      let embed = new Discord.RichEmbed()
-      .setAuthor(`You have ${eazies} Eazies!`, message.author.avatarURL)
-      .setTitle('**Elementz Shop - test**')
-      .setDescription('welcoem to shpo')
-      .setColor(0x00FF00)
-      for (i = 0; 1 < db.fetch("shop")[0].items.length; i++) {
-        embed.addField(i.name, i.desc, true);
+	 if (args[0]) {
+      if (args[0].toUpperCase() === "TEST") {
+        let embed = new Discord.RichEmbed()
+        .setAuthor(`You have ${eazies} Eazies!`, message.author.avatarURL)
+        .setTitle('**Elementz Shop - test**')
+        .setDescription('welcoem to shpo')
+        .setColor(0x00FF00)
+        for (i = 0; 1 < db.fetch("shop")[0].items.length; i++) {
+          embed.addField(i.name, i.desc, true);
+        }
+        return message.channel.send(embed)
       }
-      return message.channel.send(embed)
-    }
+	  }
  }
 
  if (msg.startsWith(`${prefix}BAN`)) {
