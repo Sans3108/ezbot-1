@@ -57,19 +57,24 @@ client.on("guildMemberAdd", member => {
  async function fixRoles() {
  if (!userInfo) {
    let welcEmb = new Discord.RichEmbed()
-     .setColor(0xeba911)
+     .setColor(0xE14B4B)
      .setImage("https://media.giphy.com/media/cKsc4H4bg1msdgkBuE/giphy.gif")
      .addField(
        "Welcome to the Elementz family, " + member.user.tag + "!",
        "Before we let you in, we'll just need some verification so we know who you are.\n\nJust send me a picture of your Trophy Road profile as shown in the video below. If you have any questions or concerns, please Direct Message <@532261291600117780>. Thank you for your cooperation."
      );
+   let chanWelcEmb = new Discord.RichEmbed()
+     .setColor(0xE14B4B)
+     .setAuthor(member.displayName, member.avatarURL)
+     .addField(`Hello ${member}, welcome to the Elementz Gaming Brawl Stars server 🎉🤗!  Please Direct Message me with a screenshot of your Brawl Stars profile to gain access to the rest of the server!`)
    member.send(welcEmb);
+   client.guilds.get("518276112040853515").channels.get("518276112040853515").send(chanWelcEmb);
  } else {
    async function getUserInfo() {
      console.log(userInfo[0]);
      let infotag;
      if (typeof userInfo[0] === "string") infotag = userInfo[0];
-     if (typeof userInfo[0] !== "string") infotag = userInfo[0][0];
+    518276112040853515 if (typeof userInfo[0] !== "string") infotag = userInfo[0][0];
      db.set(`${maMember.id}.info`, [
        infotag,
        await bsClient.getPlayer(infotag)
