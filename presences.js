@@ -1,0 +1,23 @@
+module.exports = {
+  p1: ['LISTENING', 'Mooose cursing'],
+  p2: ['WATCHING', 'Brawl TV'],
+  p3: ['PLAYING', 'Brawl Stars'],
+  p4: ['LISTENING', 'Rick Astley'],
+  p5: ['WATCHING', 'Gooose honk'],
+  p6: ['PLAYING', 'with databases'],
+  p7: ['LISTENING', 'Jacky cursing'],
+  p8: ['WATCHING', 'the chat'],
+  p9: ['PLAYING', 'with the ban hammer'],
+  p10: ['LISTENING', 'the Owners'],
+  p11: ['WATCHING', 'Sans lurk'],
+  p12: ['PLAYING', 'with Ebb\'s permissions'],
+  p13: ['LISTENING', 'Lynyrd Skynyrd'],
+  p14: ['WATCHING', 'the server grow'],
+  p15: ['PLAYING', 'with bits and pieces'],
+  p16: ['LISTENING', 'music'],
+  p17: ['WATCHING', 'over #chair-chat'],
+  p18: ['PLAYING', 'with tags and ids'],
+  p19: ['LISTENING', 'my instinct'],
+  p20: ['WATCHING', 'a tournament'],
+  p21: ['PLAYING', 'in Villa\'s villa']
+};
