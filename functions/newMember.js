@@ -139,7 +139,7 @@ module.exports = {
       let verifyEmb = new Discord.RichEmbed()
       .setAuthor(`<@${member.user.id}>`, member.user.displayAvatarURL)
       .addField("Welcome to Elementz Brawl Stars!", "Just send a screenshot of your profile as shown in the video below to get access to the rest of the server! If you have any questions, send a message to <@532261291600117780>.")
-      .setImage("https://s5.gifyu.com/images/ezgif.com-video-to-gif0193a7afc9229e98.gif");
+      .setImage("https://media.discordapp.net/attachments/518578295638458378/694625843909230602/image0.gif");
       member.guild.channels.find(c => c.name === "verification").send(verifyEmb);
       
     } else {
