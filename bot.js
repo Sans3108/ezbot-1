@@ -1,15 +1,4 @@
-// Glitch thingy so the bot doesn't go offline
-const http = require("http");
-const express = require("express");
-const app = express();
 const { db, Discord, bot } = require("./functions/requirePackages.js");
-
-app.get("/", (request, response) => {
-  response.sendStatus(200);
-});
-setInterval(() => {
-  http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`);
-}, 80000);
 
 // Calling modules & importing variables
 const { prefix, ownerlist, color } = require("./config.json");
