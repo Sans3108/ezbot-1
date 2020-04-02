@@ -10,10 +10,9 @@
     "start": "node bot.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Futuristck",
+  "author": "Futuristck, Sans & EBB",
   "license": "ISC",
   "dependencies": {
-    "@strdr4605/mockingcase": "^1.10.5",
     "brawlstars.js": "^1.0.5",
     "discord.js": "11.6.3",
     "express": "^4.17.1",

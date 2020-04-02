@@ -43,12 +43,18 @@ module.exports = {
 		if (!member.kickable) return message.channel.send(embed4);
 
 		const embed5 = new Discord.RichEmbed()
+		.setColor(color.red)
+		.addField("ERROR: Member is part of staff", `I can't kick ${member} because they are either Moderator, Community Manager or Owner.`);
+
+		if(member.roles.find(r => r.id === "580605538778480649") || member.roles.find(r => r.id === "550541139451707412") ||member.roles.find(r => r.id === "583442496227377156")) return message.channel.send(embed5);
+
+		const embed6 = new Discord.RichEmbed()
 			.setColor(color.green)
       .setAuthor(message.member.displayName, message.author.displayAvatarURL)
       .addField("Success! Member kicked!", `${member} has been kicked for \`${reason}\``);
 
 		member.kick(`${message.author.tag}: ${reason}`);
-		message.channel.send(embed5);
+		message.channel.send(embed6);
 		message.delete();
 	},
 };
