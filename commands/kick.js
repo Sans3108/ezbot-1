@@ -44,9 +44,9 @@ module.exports = {
 
 		const embed5 = new Discord.RichEmbed()
 		.setColor(color.red)
-		.addField("ERROR: Member is part of staff", `I can't kick ${member} because they are either Moderator, Community Manager or Owner.`);
+		.addField(`ERROR: You can't kick this member`, `${member} is above you in the hierarcy. You can't kick them!`);
 
-		if(member.roles.find(r => r.id === "580605538778480649") || member.roles.find(r => r.id === "550541139451707412") ||member.roles.find(r => r.id === "583442496227377156")) return message.channel.send(embed5);
+		if(message.member.highestRole.calculatedPosition <= member.highestRole.calculatedPosition) return message.channel.send(embed5);
 
 		const embed6 = new Discord.RichEmbed()
 			.setColor(color.green)
