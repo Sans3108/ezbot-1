@@ -34,8 +34,8 @@ module.exports = {
       return brawlStars.getClub(tag);
     };
     
-    let clubName = args[0].charAt(0).toUpperCase() + name.slice(1);
-		db.push("clubList", [clubName, args[1], args[2]], getClub());
+    let clubName = args[0].charAt(0).toUpperCase() + args[0].slice(1);
+		db.push("clubList", [clubName, args[1], args[2], getClub()];
 		message.channel.send(embed3);
 	}
 };
