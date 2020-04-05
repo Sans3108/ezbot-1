@@ -9,7 +9,7 @@ module.exports = {
   },
   brawlStarsJS: require('brawlstars.js'),
   get brawlStars() {
-    new this.brawlStarsJS.Client(process.env.BRAWL_TOKEN)
+    return new this.brawlStarsJS.Client(process.env.BRAWL_TOKEN)
   }
 
 }
