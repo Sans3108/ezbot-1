@@ -1,4 +1,5 @@
-const { brawlStars, db, Discord } = require("../functions/requirePackages.js");
+const { db, Discord } = require("../functions/requirePackages.js");
+const brawlStars = new require('brawlStars.js').Client(process.env.BRAWL_TOKEN);
 
 module.exports = {
 	name: 'addclub',
