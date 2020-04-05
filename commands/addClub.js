@@ -31,7 +31,10 @@ module.exports = {
     async function getClub() {
       let tag = args[1];
       if (!tag.startsWith("#")) tag = "#" + tag;
-      let club = await brawlStars.getClub(tag);
+      let club = await brawlStars.getClub(tag)
+      .catch(e => {
+				throw new Error(e);
+			});
       return club;
     };
     
