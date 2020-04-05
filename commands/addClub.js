@@ -31,7 +31,8 @@ module.exports = {
     async function getClub() {
       let tag = args[1];
       if (!tag.startsWith("#")) tag = "#" + tag;
-      return brawlStars.getClub(tag);
+      let club = await brawlStars.getClub(tag);
+      return club;
     };
     
     let clubName = args[0].charAt(0).toUpperCase() + args[0].slice(1);
