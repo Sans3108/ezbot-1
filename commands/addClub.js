@@ -1,5 +1,6 @@
 const { db, Discord } = require("../functions/requirePackages.js");
-const brawlStars = new require('brawlStars.js').Client(process.env.BRAWL_TOKEN);
+const brawlStars = require('brawlStars.js');
+const brawlStarsClient = new brawlStars.Client(process.env.BRAWL_TOKEN);
 
 module.exports = {
 	name: 'addclub',
@@ -32,7 +33,7 @@ module.exports = {
     async function getClubInfo() {
       let tag = args[1];
       if (!tag.startsWith("#")) tag = "#" + tag;
-      let club = await brawlStars.getClub(tag)
+      let club = await brawlStarsClient.getClub(tag)
       .catch(e => {
 				throw new Error(e);
 			});
