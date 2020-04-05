@@ -43,12 +43,18 @@ module.exports = {
 		if (!member.kickable) return message.channel.send(embed4);
 
 		const embed5 = new Discord.RichEmbed()
+		.setColor(color.red)
+		.addField(`ERROR: You can't kick this member`, `${member} is above you in the hierarcy. You can't kick them!`);
+
+		if(message.member.highestRole.calculatedPosition <= member.highestRole.calculatedPosition) return message.channel.send(embed5);
+
+		const embed6 = new Discord.RichEmbed()
 			.setColor(color.green)
       .setAuthor(message.member.displayName, message.author.displayAvatarURL)
       .addField("Success! Member kicked!", `${member} has been kicked for \`${reason}\``);
 
 		member.kick(`${message.author.tag}: ${reason}`);
-		message.channel.send(embed5);
+		message.channel.send(embed6);
 		message.delete();
 	},
 };

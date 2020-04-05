@@ -5,11 +5,6 @@ const { prefix, ownerlist, color } = require("./config.json");
 const presences = require("./presences");
 const fs = require("fs");
 
-// Defining Brawl Stars client
-
-//Mocking
-const mockingcase = require("@strdr4605/mockingcase");
-
 // Defining Discord bot
 bot.commands = new Discord.Collection();
 
@@ -35,7 +30,7 @@ bot.on("ready", () => {
 
   // Choose and set a random presence random presence
 
-  var randomPresence = function(obj) {
+  var randomPresence = function (obj) {
     var keys = Object.keys(obj);
     return obj[keys[(keys.length * Math.random()) << 0]];
   };
@@ -56,55 +51,6 @@ bot.on("ready", () => {
 // Message event
 
 bot.on("message", message => {
-  
-  // Apr 01 prank - mock text -------------------------------------------------------------
-  let date = Date(Date.now).toString().slice(4, -52);
-  let mydate = new Date(2020, 3, 1).toString().slice(4, -52);
-
-  if (date === mydate) {
-    if (
-      message.member.roles.find(r => r.name === "Community Manager") ||
-      message.member.roles.find(r => r.name === "Owner")
-    ) {
-      if (message.content) {
-        message.delete();
-        let a = new Discord.RichEmbed()
-          .setColor(color.random)
-          .setDescription(mockingcase(message.content));
-
-        const randomNumber = Math.floor(Math.random() * 1000 + 1);
-
-        if (randomNumber === 420) {
-          let staff = [
-            "Villa",
-            "Futuristick",
-            "NoctoYer",
-            "KinkyK",
-            "EZoroarkzoid02",
-            "Gooose",
-            "k00zie"
-          ];
-          const randomAuthor = staff[Math.floor(Math.random() * staff.length)];
-          a.setAuthor(randomAuthor);
-        } else {
-          a.setAuthor(message.member.displayName);
-        }
-
-        message.channel.send(a).then(m => {
-          let messageid = m.id;
-          let num = 0;
-          setInterval(() => {
-            num += 1;
-            if (num > 10) return;
-            a.setColor(color.random);
-            message.channel.fetchMessage(messageid).then(msg => msg.edit(a));
-          }, 2000);
-        });
-      }
-    }
-  }
-  //----------------------------------------------------------------------------------------
-  
 
   // Delete messages from the bot after using "/eval" such as "Promise pending" (requires configuration for each type of message)
 
@@ -176,10 +122,10 @@ bot.on("message", message => {
 
   if (command.ownerOnly) {
     if (!ownerlist.includes(message.author.id)) {
-     let emb = new Discord.RichEmbed()
-     .setColor(color.red)
-     .setDescription("Sorry, this command is only for the developers!");
-      
+      let emb = new Discord.RichEmbed()
+        .setColor(color.red)
+        .setDescription("Sorry, this command is only for the developers!");
+
       return message.channel.send(emb);
     }
   }
