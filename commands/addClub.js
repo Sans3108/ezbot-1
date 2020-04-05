@@ -28,7 +28,7 @@ module.exports = {
       .setAuthor(message.member.displayName, message.author.displayAvatarURL)
       .addField("**Success! Club added!**", `Added Club ${args[0]} to role ID ${args[2]}!`);
 
-    async function getClub() {
+    async function getClubInfo() {
       let tag = args[1];
       if (!tag.startsWith("#")) tag = "#" + tag;
       let club = await brawlStars.getClub(tag)
@@ -39,7 +39,7 @@ module.exports = {
     };
     
     let clubName = args[0].charAt(0).toUpperCase() + args[0].slice(1);
-		db.push("clubList", [clubName, args[1], args[2], getClub()];
+		db.push("clubList", [clubName, args[1], args[2], getClubInfo()];
 		message.channel.send(embed3);
 	}
 };
