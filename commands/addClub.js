@@ -41,7 +41,7 @@ module.exports = {
         lowerName[i] = lowerName[i][0].toUpperCase() + lowerName[i].slice(1);
       }
 			return lowerName.join(" ");
-   }
+   };
     
     let clubName = titleCase(args[0]);
     
