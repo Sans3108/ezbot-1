@@ -20,7 +20,7 @@ module.exports = {
 		const embed2 = new Discord.RichEmbed()
 			.setColor(color.red)
 			.addField("ERROR: Invalid arguments provided", "You provided incorrect arguments!")
-      .addField("Proper usage:", `\`/addclub [Club name] [Club tag] [Role ID]\``);
+      .addField("Proper usage:", `\`/addclub [Club name] [Club tag] [Role ID]\``)
 
 		if (!args[2] || args[2].startsWith("#") || !isNaN(args[0][0])) return message.channel.send(embed2);
 		const embed3 = new Discord.RichEmbed()
