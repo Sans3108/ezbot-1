@@ -18,7 +18,7 @@ module.exports = {
 
 let connection = null;
 
-r.connect( {host: 'localhost', port: 28015}, function(err, conn) {
+r.connect( {host: '138.91.122.59', port: 28015}, function(err, conn) {
     if (err) throw err;
     module.exports.connection = conn;
 })
