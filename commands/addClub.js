@@ -1,6 +1,4 @@
-const { db, Discord } = require("../functions/requirePackages.js");
-const brawlStars = require('brawlstars.js');
-const brawlStarsClient = new brawlStars.Client(process.env.BRAWL_TOKEN);
+const { db, Discord, brawlStars, rethink } = require("../functions/requirePackages.js");
 
 module.exports = {
 	name: 'addclub',
@@ -31,17 +29,27 @@ module.exports = {
       .addField("**Success! Club added!**", `Added Club ${args[0]} to role ID ${args[2]}!`);
 
     async function getClubInfo() {
-      let tag = args[1];
-      if (!tag.startsWith("#")) tag = "#" + tag;
-      let club = await brawlStarsClient.getClub(tag)
+      let club = await brawlStars.getClub(args[1])
       .catch(e => {
 				throw new Error(e);
 			});
       return club;
     };
+		const titleCase = (name) => {
+      let lowerName = string.toLowerCase().split(" ");
+      for(let i = 0; i < lowerName.length; i++){
+        lowerName[i] = lowerName[i][0].toUpperCase() + lowerName[i].slice(1);
+      }
+			return lowerName.join(" ");
+   }
     
-    let clubName = args[0].charAt(0).toUpperCase() + args[0].slice(1);
-		db.push("clubList", [clubName, args[1], args[2], getClubInfo()];
+    let clubName = titleCase(args[0]);
+    
+    rethink.db("clubs").table("list").insert({
+      name: clubName,
+			tag: args[1],
+			id: args[2]
+		});
 		message.channel.send(embed3);
 	}
 };
