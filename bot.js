@@ -163,9 +163,7 @@ bot.on("message", message => {
             let cooldownembed = new Discord.RichEmbed()
                 .setColor(color.red)
                 .setDescription(
-                    `(Cooldown) Please wait ${timeLeft.toFixed(
-                        1
-                    )} more second(s) before reusing the \`${command.name}\` command.`
+                    `(Cooldown) Please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${command.name}\` command.`
                 );
 
             return message.channel.send(cooldownembed);
