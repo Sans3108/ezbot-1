@@ -167,8 +167,8 @@ bot.on("message", message => {
                 );
 
             return message.channel.send(cooldownembed);
-        }
-    }
+        };
+    };
 
     timestamps.set(message.author.id, now);
     setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
