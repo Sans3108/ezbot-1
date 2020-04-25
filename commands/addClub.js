@@ -15,7 +15,7 @@ module.exports = {
         
         const roleID = args.pop();
         const clubTag = args.pop();
-        const clubName = args.join(" ");
+        let clubName = args.join(" ");
         args = [clubName, clubTag, roleID].filter((arg) => arg);
         
         const embed1 = new Discord.RichEmbed()
@@ -53,7 +53,7 @@ module.exports = {
             return lowerName.join(" ");
         };
         
-        let clubName = titleCase(args[0]);
+        clubName = titleCase(args[0]);
         
         rethink.db("clubs").table("list").insert({
             name: clubName,
