@@ -1,43 +1,37 @@
 const { getPlayer } = require("./brawlStars.js");
-const { brawlStars, db, Discord } = require("./requirePackages.js");
+const { brawlStars, Discord, rethink, connection } = require("./requirePackages.js");
 
 module.exports = {
   refreshRoles: async function(member, tag) {
     
-    // Defining variables, prepending # to tag
-    if (!tag.startsWith("#")) tag = "#" + tag;
+    // Defining variables for later global use
     const player = getPlayer(tag);
     let clubName;
     let clubRole;
-    let clubList = db.fetch("clubList");
+    let clubList;
+    // Fetching Club list, converting to array
+    rethink.db('clubs').table('list').run(connection, (err, cursor) => {
+        if (err) throw err;
+        cursor.toArray((arrerr, clubsArray) => {
+            if (arrerr) throw arrerr;
+            clubList = clubsArray;
+        });
+    });
     
     /**
-     * Some function to check if an object is empty (taken off StackOverflow)
-     * @param {Object} obj the object to check
+     * Check if user is in EZ
+     * @param {String} name - the name of the user's Club
      */
-    function isEmpty(obj) {
+    function isInEZ(name) {
       
-      for(let key in obj) {
-        if(obj.hasOwnProperty(key)) return false;
-      };
-      return true;
-      
-    };
-    
-    /**
-     * Check if user is in Elementz
-     * @param {String} name the name of the user's Club
-     */
-    function isInElementz(name) {
-      
-      let clubArr = clubList.filter(clubs => clubs[0].toUpperCase() === name.toUpperCase());
+      let clubArr = clubList.filter(clubObj => clubObj.name.toUpperCase() === name.toUpperCase());
       if (!clubArr.length) return false;
       return true;
       
     };
     
     // Getting player's Club info
-    if (isEmpty(player.club)) {
+    if (!player.club) {
       
       clubName = null;
       clubRole = null;
@@ -51,6 +45,7 @@ module.exports = {
     
     // Gets Club name without "EZ"
     if (clubName.startsWith("EZ")) clubName = clubName.slice(3);
+      
     /** 
      * Removes incorrect roles from param member
      * @param {GuildMember} member - the member to remove roles from
@@ -71,7 +66,7 @@ module.exports = {
       
       // Outcome 1
       if (member.roles.find(r => r.name === "Guest")) {
-        if (isInElementz(name)) {
+        if (isInEZ(name)) {
           await member.removeRole(member.guild.roles.find(r => r.name === "Guest"));
         };
       } else {
@@ -97,8 +92,8 @@ module.exports = {
           // until you find the one they *do* have at the moment
           for (let i in clubList) {
             // then remove it.
-            if (member.roles.find(r => r.name.toUpperCase() === clubList[i][0].toUpperCase())) {
-              await member.removeRole(member.roles.find(r => r.name.toUpperCase() === clubList[i][0].toUpperCase()));
+            if (member.roles.find(r => r.name.toUpperCase() === clubList[i].name.toUpperCase())) {
+              await member.removeRole(member.roles.find(r => r.name.toUpperCase() === clubList[i].name.toUpperCase()));
             };
           };
         };
@@ -124,7 +119,7 @@ module.exports = {
       */
       
       // Outcome 1
-      if (!isInElementz(clubName)) {
+      if (!isInEZ(clubName)) {
         await member.addRole(member.guild.roles.find(r => r.name === "Guest"));
       } else {
         
@@ -140,7 +135,7 @@ module.exports = {
       };
     };
     
-    if (!isInElementz(clubName) && member.roles.find(r => r.name === "Guest")) {
+    if (!isInEZ(clubName) && member.roles.find(r => r.name === "Guest")) {
       return;
     } else if (member.roles.find(r => r.name.toUpperCase() === clubName.toUpperCase()) && member.roles.find(r => r.name.toUpperCase() === clubRole.toUpperCase())) {
       return;

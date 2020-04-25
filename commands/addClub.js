@@ -1,4 +1,4 @@
-const { db, Discord, brawlStars, rethink } = require("../functions/requirePackages.js");
+const { Discord, brawlStars, rethink, connection } = require("../functions/requirePackages.js");
 
 module.exports = {
     name: 'addclub',
@@ -12,6 +12,12 @@ module.exports = {
     allowedGuilds: [],
     execute(message, args, bot, color) {
         const perms = ["MANAGE_GUILD"];
+        
+        const roleID = args.pop();
+        const clubTag = args.pop();
+        const clubName = args.join(" ");
+        args = [clubName, clubTag, roleID].filter((arg) => arg);
+        
         const embed1 = new Discord.RichEmbed()
             .setColor(color.red)
             .addField("ERROR: Insufficient permissions", "You don't have permission to run this command!");
@@ -22,11 +28,15 @@ module.exports = {
             .addField("ERROR: Invalid arguments provided", "You provided incorrect arguments!")
             .addField("Proper usage:", `\`/addclub [Club name] [Club tag] [Role ID]\``)
 
-        if (!args[2] || args[2].startsWith("#") || !isNaN(args[0][0])) return message.channel.send(embed2);
+        if (!args[2] || 
+            args[2].startsWith("#") || 
+            args[0].startsWith("#") || 
+            !isNaN(args[0][0] || 
+            isNaN(args[2]))) return message.channel.send(embed2);
         const embed3 = new Discord.RichEmbed()
             .setColor(color.green)
             .setAuthor(message.member.displayName, message.author.displayAvatarURL)
-            .addField("**Success! Club added!**", `Added Club ${args[0]} to role ID ${args[2]}!`);
+            .addField("**Success! Club added!**", `Added Club EZ ${args[0]} to role ID ${args[2]}!`);
 
         async function getClubInfo() {
             let club = await brawlStars.getClub(args[1])
@@ -36,20 +46,22 @@ module.exports = {
             return club;
         };
         const titleCase = (name) => {
-            let lowerName = string.toLowerCase().split(" ");
+            let lowerName = name.toLowerCase().split(" ");
             for (let i = 0; i < lowerName.length; i++){
                 lowerName[i] = lowerName[i][0].toUpperCase() + lowerName[i].slice(1);
             }
             return lowerName.join(" ");
         };
-    
+        
         let clubName = titleCase(args[0]);
         
         rethink.db("clubs").table("list").insert({
             name: clubName,
             tag: args[1],
             id: args[2]
+        }).run(connection, (err, result) => {
+            if (err) throw err;
+            return message.channel.send(embed3);
         });
-        message.channel.send(embed3);
     }
 };
