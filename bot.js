@@ -121,7 +121,7 @@ bot.on("message", message => {
         
     // Check if not allowed guild    
         
-    if (command.allowedGuilds) {
+    if (command.allowedGuilds[0]) {
         if (!command.allowedGuilds.find(id => id === message.guild.id)) {
             let emb = new Discord.RichEmbed()
                 .setColor(color.red)
