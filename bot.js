@@ -1,6 +1,7 @@
 const { Discord, bot } = require("./functions/requirePackages.js");
 
 // Calling modules & importing variables
+require("dotenv").config()
 const { prefix, ownerlist, color } = require("./config.json");
 const presences = require("./presences");
 const fs = require("fs");
