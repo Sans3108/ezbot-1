@@ -18,7 +18,7 @@ module.exports = {
 
 let connection = null;
 
-r.connect( {host: process.env.RETHINK_HOST_IP, port: process.env.RETHINK_HOST_PORT}, function(err, conn) {
+r.connect( {host: process.env.RETHINK_HOST_IP }, function(err, conn) {
     if (err) throw err;
     module.exports.connection = conn;
 })
