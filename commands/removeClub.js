@@ -53,6 +53,7 @@ module.exports = {
         
         rethink.db('clubs').table('list').filter(rethink.row("name").eq(args[0])).delete().run(connection, (err, result) => {
             if (err) throw err;
+            console.log(result);
             return message.channel.send(embed3);
         });
     }
