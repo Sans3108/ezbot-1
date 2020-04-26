@@ -1,4 +1,4 @@
-const { brawlStars, db, Discord } = require("../functions/requirePackages.js");
+const { brawlStars, Discord } = require("../functions/requirePackages.js");
 
 module.exports = {
   name: "ping",
