@@ -32,8 +32,7 @@ module.exports = {
                 if (c.allowedGuilds[0] && !c.allowedGuilds.includes(message.guild.id)) return false;
                 if (c.bannedGuilds[0] && c.bannedGuilds.includes(message.guild.id)) return false;
                 return true;
-            }).map(command => command.name).join('_ | _'));
-			
+            }).map(command => command.name).join('_ | _'));			
 			data.push(`_\nYou can send \`${prefix}help [command name]\` to get info on a specific command!`);
 
 			const embed4 = new Discord.RichEmbed()
