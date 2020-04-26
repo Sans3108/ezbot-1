@@ -121,15 +121,17 @@ bot.on("message", message => {
         
     // Check if not allowed guild    
         
-    if (command.allowedGuilds[0]) {
-        if (!command.allowedGuilds.find(id => id === message.guild.id)) {
-            let emb = new Discord.RichEmbed()
-                .setColor(color.red)
-                .addField(
-                    "ERROR: Banned guild",
-                    "Sorry, this command can't be used in this server!"
-                );
-            return message.channel.send(emb);
+    if (command.allowedGuilds) {
+        if (command.allowedGuilds[0]) {
+            if (!command.allowedGuilds.find(id => id === message.guild.id)) {
+                let emb = new Discord.RichEmbed()
+                    .setColor(color.red)
+                    .addField(
+                        "ERROR: Banned guild",
+                        "Sorry, this command can't be used in this server!"
+                    );
+                return message.channel.send(emb);
+            }
         }
     }
         
