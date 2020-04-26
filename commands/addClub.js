@@ -1,4 +1,11 @@
-const { Discord, brawlStars, rethink, connection } = require("../functions/requirePackages.js");
+const { Discord, brawlStars, rethink } = require("../functions/requirePackages.js");
+
+let connection = null;
+
+rethink.connect( {host: process.env.RETHINK_HOST_IP }, function(err, conn) {
+    if (err) throw err;
+    connection = conn;
+})
 
 module.exports = {
     name: 'addclub',
