@@ -27,12 +27,12 @@ module.exports = {
 		.setDescription('That command does not exist... try again?');
 		if (!args.length) {
 			data.push('**Here\'s a list of all my commands:**\n_');
-			
-			if(bannedGuilds[0]) {
-				data.push(commands.filter(c => !c.ownerOnly && !c.bannedGuilds.includes(message.guild.id)).map(command => command.name).join('_ | _'));
-			} else {
-				data.push(commands.filter(c => !c.ownerOnly)).map(command => command.name).join('_ | _'));
-			}
+            data.push(commands.filter(c => {
+                if (c.ownerOnly) return false;
+                if (c.allowedGuilds[0] && !c.allowedGuilds.includes(message.guild.id)) return false;
+                if (c.bannedGuilds[0] && c.bannedGuilds.includes(message.guild.id)) return false;
+                return true;
+            }).map(command => command.name).join('_ | _'));
 			
 			data.push(`_\nYou can send \`${prefix}help [command name]\` to get info on a specific command!`);
 
