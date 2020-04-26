@@ -5,7 +5,7 @@ function clean(text) {
 		return text;
 };
 
-const { brawlStars, db, Discord, rethink } = require("../functions/requirePackages.js");
+const { brawlStars, Discord, rethink } = require("../functions/requirePackages.js");
 let connection;
 rethink.connect( {host: process.env.RETHINK_HOST_IP }, function(err, conn) {
     if (err) throw err;
@@ -15,9 +15,9 @@ rethink.connect( {host: process.env.RETHINK_HOST_IP }, function(err, conn) {
 module.exports = {
 	name: 'eval',
 	description: 'Evaluates the given expression',	
-	usage: '[text]',
+	usage: '[code]',
 	ownerOnly: true,
-	cooldown: 2,
+	cooldown: 1,
   bannedGuilds: [],
   allowedGuilds: [],
 	execute(message, args, bot, color) {
