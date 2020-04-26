@@ -51,7 +51,7 @@ module.exports = {
             .setAuthor(message.member.displayName, message.author.displayAvatarURL)
             .addField("Success! Club removed!", `Removed Club \`${args[0]}\` from the database!`);
         
-        rethink.db('clubs').table('list').filter(r.row("name").eq(args[0])).delete().run(connection, (err, result) => {
+        rethink.db('clubs').table('list').filter(rethink.row("name").eq(args[0])).delete().run(connection, (err, result) => {
             if (err) throw err;
             return message.channel.send(embed3);
         });
