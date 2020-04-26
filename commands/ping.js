@@ -4,6 +4,8 @@ module.exports = {
   name: "ping",
   description: "PONG!",
   cooldown: 2,
+  bannedGuilds: [],
+  allowedGuilds: [],
   execute(message, args, bot, color) {
     const embed1 = new Discord.RichEmbed()
       .setColor(color.blue)
