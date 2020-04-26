@@ -28,7 +28,7 @@ module.exports = {
             .addField("ERROR: Club not found", "Sorry, I couldn't find that Club in my database! Are you sure you spelled it correctly?")
         
         const titleCase = (name) => {
-            let lowerName = string.toLowerCase().split(" ");
+            let lowerName = name.toLowerCase().split(" ");
             for (let i = 0; i < lowerName.length; i++){
                 lowerName[i] = lowerName[i][0].toUpperCase() + lowerName[i].slice(1);
             };
