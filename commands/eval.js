@@ -5,7 +5,12 @@ function clean(text) {
 		return text;
 };
 
-const { brawlStars, db, Discord } = require("../functions/requirePackages.js");
+const { brawlStars, db, Discord, rethink } = require("../functions/requirePackages.js");
+let connection;
+rethink.connect( {host: process.env.RETHINK_HOST_IP }, function(err, conn) {
+    if (err) throw err;
+    connection = conn;
+})
 
 module.exports = {
 	name: 'eval',
